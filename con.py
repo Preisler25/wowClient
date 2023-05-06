@@ -9,5 +9,5 @@ def connect():
         s.connect((HOST, PORT))
         s.sendall(b"Hello, world")
         data = s.recv(1024)
-    debug("Received", socket.gethostname())
+    debug("alma")
     print(f"Received {data!r}")

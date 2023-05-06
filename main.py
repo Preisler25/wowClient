@@ -1,40 +1,73 @@
 import pygame
-from pygame import Vector2
-import sys
-from debug import debug
-from con import connect
+import socketio
 
 pygame.init()
-screen = pygame.display.set_mode((800, 400))
-pygame.display.set_caption("WOW 2.0")
-clock = pygame.time.Clock()
-test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
 
-bg_surface = pygame.image.load("graphics/Sky.png").convert()
-ground_surface = pygame.image.load("graphics/ground.png").convert()
-text_surface = test_font.render("Hello World!", False, (255, 255, 255))
+# Display dimensions
+display_width = 800
+display_height = 600
 
-snail_surface = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
-snail_position = Vector2(100, 260)
+# Colors
+black = (0, 0, 0)
+white = (255, 255, 255)
 
-prev_time = pygame.time.get_ticks()
+# Create game display
+game_display = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Game')
 
-while True:
-    connect()
-    current_time = pygame.time.get_ticks()
-    dt = current_time - prev_time
-    prev_time = current_time
+# Socket.IO client
+sio = socketio.Client()
+
+# Socket.IO event handlers
+
+
+@sio.event
+def connect():
+    print('Connected to server')
+
+
+@sio.event
+def disconnect():
+    print('Disconnected from server')
+
+
+@sio.event
+def move(msg):
+    print('Move received: ' + msg)
+    # Do something with the move data, like update game state
+
+
+# Connect to server
+sio.connect('http://localhost:3000')
+
+# Game loop
+game_exit = False
+while not game_exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            game_exit = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                sio.emit('move', 'up')
+            elif event.key == pygame.K_DOWN:
+                sio.emit('move', 'down')
+            elif event.key == pygame.K_LEFT:
+                sio.emit('move', 'left')
+            elif event.key == pygame.K_RIGHT:
+                sio.emit('move', 'right')
 
-    snail_position.x += 200 * dt / 1000
+    # Fill display with white
+    game_display.fill(white)
 
-    screen.blit(bg_surface, (0, 0))
-    screen.blit(ground_surface, (0, 300))
-    screen.blit(text_surface, (100, 100))
-    screen.blit(snail_surface, round(snail_position))
+    # Draw game objects
+    # ...
 
+    # Update display
     pygame.display.update()
-    clock.tick(600)
+
+# Disconnect from server
+sio.disconnect()
+
+# Quit Pygame
+pygame.quit()
+quit()
