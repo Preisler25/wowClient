@@ -20,10 +20,10 @@ snail_position = Vector2(100, 260)
 prev_time = pygame.time.get_ticks()
 
 while True:
+    connect()
     current_time = pygame.time.get_ticks()
     dt = current_time - prev_time
     prev_time = current_time
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -35,7 +35,6 @@ while True:
     screen.blit(ground_surface, (0, 300))
     screen.blit(text_surface, (100, 100))
     screen.blit(snail_surface, round(snail_position))
-    debug(snail_position.x)
 
     pygame.display.update()
     clock.tick(600)
