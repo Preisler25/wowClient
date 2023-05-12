@@ -1,5 +1,5 @@
 import pygame
-import socketio
+from debug import debug
 
 pygame.init()
 
@@ -15,30 +15,8 @@ white = (255, 255, 255)
 game_display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Game')
 
-# Socket.IO client
-sio = socketio.Client()
-
-# Socket.IO event handlers
-
-
-@sio.event
-def connect():
-    print('Connected to server')
-
-
-@sio.event
-def disconnect():
-    print('Disconnected from server')
-
-
-@sio.event
-def move(msg):
-    print('Move received: ' + msg)
-    # Do something with the move data, like update game state
-
-
-# Connect to server
-sio.connect('http://localhost:3000')
+button = pygame.image.load('graphics\Player\player_stand.png').convert_alpha()
+b = game_display.blit(button,(300,200))
 
 # Game loop
 game_exit = False
@@ -46,27 +24,26 @@ while not game_exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_exit = True
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            pos = pygame.mouse.get_pos()
+            if b.collidepoint(pos):
+                print("Hello")
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                sio.emit('move', 'up')
+                debug("alma")
             elif event.key == pygame.K_DOWN:
-                sio.emit('move', 'down')
+                debug("körte")
             elif event.key == pygame.K_LEFT:
-                sio.emit('move', 'left')
+                debug("alma")
             elif event.key == pygame.K_RIGHT:
-                sio.emit('move', 'right')
-
-    # Fill display with white
-    game_display.fill(white)
-
+                debug("alma")
+            
     # Draw game objects
     # ...
 
     # Update display
     pygame.display.update()
 
-# Disconnect from server
-sio.disconnect()
 
 # Quit Pygame
 pygame.quit()
