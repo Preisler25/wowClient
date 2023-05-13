@@ -21,17 +21,37 @@ class Char:
         self.pos_x = random.randint(0, max_width)
         self.pos_y = random.randint(0, max_height)
 
+def dotCh(text, count):
+    if count == 240:
+        count += 1
+        text += "."
+        count = 0
+        if text[-4:-1] == "...":
+            text = "Press space "
+    else:
+        count +=1
+    return text, count
+
 
 def lobby(best_time=100, end_time=100):
     pygame.display.set_caption('Lobby')
     game_exit = False
 
+    counter = 0
+    press_text = "Press space "
+
     amplitude = 12
     frequency = 0.2
 
+    settings_btn_size = 70
+
+    settings_btn = pygame.image.load("graphics/settings.png").convert_alpha()
+    settings_btn = pygame.transform.scale(settings_btn, (settings_btn_size, settings_btn_size))
     bg = pygame.image.load("graphics/menu_bg.jpeg")
 
     while not game_exit:
+
+        press_text, counter = dotCh(press_text, counter)
 
         displacement_x = amplitude * \
             math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
@@ -42,11 +62,12 @@ def lobby(best_time=100, end_time=100):
         displacement_y = int(displacement_y)
 
         game_display.blit(bg, (0, 0))
-        start = showText("Press space to start or click on this", (int(display_width/2-250) +
+        setting_rect = game_display.blit(settings_btn, (display_width-settings_btn_size, 0))
+        showText(press_text, (int(display_width/2-100) +
                                                                    displacement_x), int((display_height/4) + displacement_y), 230)
         showText(f"Best time: {best_time}",
                  int(display_width/2-250 + displacement_x), int(display_height/2+50 - displacement_x))
-        showText(f"Last time: {end_time}", int(display_width/2-250 - displacement_x),
+        showText(f"Last time: {end_time}", int(display_width/2-200 - displacement_x),
                  int(display_height/2+200 - displacement_y))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -57,9 +78,32 @@ def lobby(best_time=100, end_time=100):
                     pygame.display.set_caption('Lobby')
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
-                if start.collidepoint(pos):
-                    best_time, end_time = gameLoop(best_time)
-                    pygame.display.set_caption('Lobby')
+                if setting_rect.collidepoint(pos):
+                    settings_page()
+        pygame.display.update()
+
+def settings_page():
+    pygame.display.set_caption('Settings')
+
+    back_icon_size = 50
+
+    game_exit = False
+    bg = pygame.image.load("graphics/menu_bg.jpeg")
+    back = pygame.image.load("graphics/back.jpg").convert_alpha()
+    back = pygame.transform.scale(back, (back_icon_size, back_icon_size))
+
+    while not game_exit:
+        game_display.blit(bg, (0, 0))
+        back_rect = game_display.blit(back, (0, 0))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_exit = True
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if back_rect.collidepoint(pos):
+                    game_exit = True
+
         pygame.display.update()
 
 
