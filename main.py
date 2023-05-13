@@ -3,11 +3,20 @@ from debug import debug
 import random
 import time
 
+class Char:
+    def __init__(self,imgURl):
+        self.pos_x = 0
+        self.pos_y = 0
+        self.img = pygame.image.load(imgURl).convert_alpha()
 
-def genRandomPos(s_w, s_h):
-    p_x = random.randint(0, s_w)
-    p_y = random.randint(0, s_h)
-    return p_x, p_y
+    def __str__(self):
+        return f"pos_x:{self.pos_x}, pos_y:{self.pos_y}"
+
+    def setRandomPos(self, w, h):
+        max_width = w-self.img.get_width()
+        max_height = h-self.img.get_height()
+        self.pos_x = random.randint(0, max_width)
+        self.pos_y = random.randint(0, max_height)
 
 
 def lobby(best_time=100, end_time=100):
@@ -16,10 +25,8 @@ def lobby(best_time=100, end_time=100):
     while not game_exit:
         game_display.fill(black)
         debug("Press space to start", display_width/2-150, display_height/2)
-        debug(f"Best time: {best_time}",
-              display_width/2-150, display_height/2+50)
-        debug(f"Last time: {end_time}", display_width/2-150,
-              display_height/2+100)
+        debug(f"Best time: {best_time}",display_width/2-150, display_height/2+50)
+        debug(f"Last time: {end_time}", display_width/2-150,display_height/2+100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
@@ -30,15 +37,11 @@ def lobby(best_time=100, end_time=100):
 
 
 def gameLoop(best_time):
-    # Load button
-    enemy = pygame.image.load(
-        'graphics/Player/player_stand.png').convert_alpha()
-    w = display_width-enemy.get_width()
-    h = display_height-enemy.get_height()
-
+    # Load enemy
+    enemy = Char('graphics\Player\player_stand.png')
+    enemy.setRandomPos(display_width, display_height)
     pygame.display.set_caption('Game')
 
-    pos_x, pos_y = genRandomPos(w, h)
     # Game loop
     game_exit = False
     start_time = time.time()
@@ -46,7 +49,7 @@ def gameLoop(best_time):
     while counter < 10 and not game_exit:
 
         game_display.fill(black)
-        b = game_display.blit(enemy, (pos_x, pos_y))
+        b = game_display.blit(enemy.img, (enemy.pos_x, enemy.pos_y))
         # Displaying time and points
         debug(f"Time: {time.time()-start_time}", display_width-170, 10)
         debug(f"Remaining: {10-counter}", display_width/2-75, 10)
@@ -57,7 +60,8 @@ def gameLoop(best_time):
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 if b.collidepoint(pos):
-                    pos_x, pos_y = genRandomPos(w, h)
+                    enemy.setRandomPos(display_width, display_height)
+                    print(enemy)
                     counter += 1
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
