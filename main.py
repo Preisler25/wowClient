@@ -25,26 +25,26 @@ def lobby(best_time=100, end_time=100):
     pygame.display.set_caption('Lobby')
     game_exit = False
 
-    amplitude = 10
-    frequency = 0.5
+    amplitude = 12
+    frequency = 0.2
 
     while not game_exit:
 
         displacement_x = amplitude * \
-            math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 1000)
+            math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
         displacement_x = int(displacement_x)
 
         displacement_y = amplitude * \
-            math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 1000)
+            math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
         displacement_y = int(displacement_y)
 
         game_display.fill(black)
-        debug("Press space to start", (display_width/2-150) +
-              displacement_x, (display_height/2) + displacement_y)
+        debug("Press space to start", (int(display_width/2-150) +
+              displacement_x), int((display_height/4) + displacement_y))
         debug(f"Best time: {best_time}",
-              display_width/2-150, display_height/2+50)
-        debug(f"Last time: {end_time}", display_width/2-150,
-              display_height/2+100)
+              int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
+        debug(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
+              int(display_height/2+200 - displacement_y))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
