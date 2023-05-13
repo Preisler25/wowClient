@@ -5,12 +5,23 @@ import random
 import time
 import math
 
+class PressBtn:
+    def __init__(self, pos_x, pos_y, wanted_size_x, wanted_size_y, imgUrl):
+        self.pos = (pos_x, pos_y)
+        self.wanted_size_x = wanted_size_x
+        self.wanted_size_y = wanted_size_y
+        self.img = pygame.image.load(imgUrl).convert_alpha()
+
+    def reSize(self):
+        self.img = pygame.transform.scale(self.img, (self.wanted_size_x, self.wanted_size_y))
+
+
 
 class Char:
-    def __init__(self, imgURl):
+    def __init__(self, imgUrl):
         self.pos_x = 0
         self.pos_y = 0
-        self.img = pygame.image.load(imgURl).convert_alpha()
+        self.img = pygame.image.load(imgUrl).convert_alpha()
 
     def __str__(self):
         return f"pos_x:{self.pos_x}, pos_y:{self.pos_y}"
@@ -35,8 +46,8 @@ def dotCh(text, count, dt):
 
 
 def lobby(best_time=100, end_time=100):
-    pygame.display.set_caption('Lobby')
     game_exit = False
+    pygame.display.set_caption('Lobby')
 
     counter = 0.0
     press_text = "Press space "
@@ -46,8 +57,9 @@ def lobby(best_time=100, end_time=100):
 
     settings_btn_size = 70
 
-    settings_btn = pygame.image.load("graphics/settings.png").convert_alpha()
-    settings_btn = pygame.transform.scale(settings_btn, (settings_btn_size, settings_btn_size))
+    settings_btn = PressBtn(display_width-settings_btn_size, 0, settings_btn_size, settings_btn_size, "graphics/settings.png")
+    settings_btn.reSize()
+
     bg = pygame.image.load("graphics/menu_bg.jpeg")
 
     prev_time = time.time()
@@ -68,13 +80,12 @@ def lobby(best_time=100, end_time=100):
         displacement_y = int(displacement_y)
 
         game_display.blit(bg, (0, 0))
-        setting_rect = game_display.blit(settings_btn, (display_width-settings_btn_size, 0))
-        showText(press_text, (int(display_width/2-100) +
-                                                                   displacement_x), int((display_height/4) + displacement_y), 230)
-        showText(f"Best time: {best_time}",
-                 int(display_width/2-250 + displacement_x), int(display_height/2+50 - displacement_x))
-        showText(f"Last time: {end_time}", int(display_width/2-200 - displacement_x),
-                 int(display_height/2+200 - displacement_y))
+        
+        setting_rect = game_display.blit(settings_btn.img, settings_btn.pos)
+        showText(press_text, (int(display_width/2-100) +displacement_x), int((display_height/4) + displacement_y), 230)
+        showText(f"Best time: {best_time}",int(display_width/2-250 + displacement_x), int(display_height/2+50 - displacement_x))
+        showText(f"Last time: {end_time}", int(display_width/2-200 - displacement_x),int(display_height/2+200 - displacement_y))
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
@@ -89,18 +100,18 @@ def lobby(best_time=100, end_time=100):
         pygame.display.update()
 
 def settings_page():
+    game_exit = False
     pygame.display.set_caption('Settings')
 
-    back_icon_size = 50
-
-    game_exit = False
     bg = pygame.image.load("graphics/menu_bg.jpeg")
-    back = pygame.image.load("graphics/back.jpg").convert_alpha()
-    back = pygame.transform.scale(back, (back_icon_size, back_icon_size))
+
+    back_icon_size = 50
+    back = PressBtn(0, 0, back_icon_size, back_icon_size, "graphics/back.jpg")
+    back.reSize()
 
     while not game_exit:
         game_display.blit(bg, (0, 0))
-        back_rect = game_display.blit(back, (0, 0))
+        back_rect = game_display.blit(back.img, back.pos)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
