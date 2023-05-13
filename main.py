@@ -43,11 +43,11 @@ def lobby(best_time=100, end_time=100):
 
         game_display.blit(bg, (0, 0))
         start = showText("Press space to start or click on this", (int(display_width/2-250) +
-                                                                   displacement_x), int((display_height/4) + displacement_y), 10, (255, 255, 255))
-        debug(f"Best time: {best_time}",
-              int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
-        debug(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
-              int(display_height/2+200 - displacement_y))
+                                                                   displacement_x), int((display_height/4) + displacement_y), 230)
+        showText(f"Best time: {best_time}",
+                 int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
+        showText(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
+                 int(display_height/2+200 - displacement_y))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
@@ -78,7 +78,7 @@ def gameLoop(best_time):
 
         game_display.blit(bg, (0, 0))
         b = game_display.blit(enemy.img, (enemy.pos_x, enemy.pos_y))
-        showText(f"Time: {time.time()-start_time}", display_width-170, 10)
+        showText(f"Time: {time.time()-start_time}", display_width/2-200, 40)
         showText(f"Remaining: {10-counter}", display_width/2-75, 10)
 
         for event in pygame.event.get():
