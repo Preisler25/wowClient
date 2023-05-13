@@ -1,5 +1,6 @@
 import pygame
 from debug import debug
+from text_to_scr import showText
 import random
 import time
 import math
@@ -38,9 +39,11 @@ def lobby(best_time=100, end_time=100):
             math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
         displacement_y = int(displacement_y)
 
-        game_display.fill(black)
-        debug("Press space to start", (int(display_width/2-150) +
-              displacement_x), int((display_height/4) + displacement_y))
+        bg = pygame.image.load("graphics/menu_bg.jpeg")
+
+        game_display.blit(bg, (0, 0))
+        start = showText("Press space to start or click on this", (int(display_width/2-250) +
+                                                                   displacement_x), int((display_height/4) + displacement_y), 10)
         debug(f"Best time: {best_time}",
               int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
         debug(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
@@ -50,6 +53,11 @@ def lobby(best_time=100, end_time=100):
                 game_exit = True
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
+                    best_time, end_time = gameLoop(best_time)
+                    pygame.display.set_caption('Lobby')
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if start.collidepoint(pos):
                     best_time, end_time = gameLoop(best_time)
                     pygame.display.set_caption('Lobby')
         pygame.display.update()
@@ -70,8 +78,8 @@ def gameLoop(best_time):
         game_display.fill(black)
         b = game_display.blit(enemy.img, (enemy.pos_x, enemy.pos_y))
         # Displaying time and points
-        debug(f"Time: {time.time()-start_time}", display_width-170, 10)
-        debug(f"Remaining: {10-counter}", display_width/2-75, 10)
+        showText(f"Time: {time.time()-start_time}", display_width-170, 10)
+        showText(f"Remaining: {10-counter}", display_width/2-75, 10)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
