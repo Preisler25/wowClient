@@ -2,6 +2,7 @@ import pygame
 from debug import debug
 import random
 import time
+import math
 
 
 def genRandomPos(s_w, s_h):
@@ -13,9 +14,16 @@ def genRandomPos(s_w, s_h):
 def lobby(best_time=100, end_time=100):
     pygame.display.set_caption('Lobby')
     game_exit = False
+
+    amplitude = 10
+    frequency = 0.5
+
     while not game_exit:
+        displacement = amplitude * \
+            math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 1000)
         game_display.fill(black)
-        debug("Press space to start", display_width/2-150, display_height/2)
+        debug("Press space to start", (display_width/2-150) +
+              displacement, (display_height/2) + displacement)
         debug(f"Best time: {best_time}",
               display_width/2-150, display_height/2+50)
         debug(f"Last time: {end_time}", display_width/2-150,
@@ -72,6 +80,8 @@ def gameLoop(best_time):
 
 
 pygame.init()
+
+clock = pygame.time.Clock()
 
 # Display dimensions
 display_width = 800
