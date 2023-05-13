@@ -29,11 +29,18 @@ def lobby(best_time=100, end_time=100):
     frequency = 0.5
 
     while not game_exit:
-        displacement = amplitude * \
+
+        displacement_x = amplitude * \
             math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 1000)
+        displacement_x = int(displacement_x)
+
+        displacement_y = amplitude * \
+            math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 1000)
+        displacement_y = int(displacement_y)
+
         game_display.fill(black)
         debug("Press space to start", (display_width/2-150) +
-              displacement, (display_height/2) + displacement)
+              displacement_x, (display_height/2) + displacement_y)
         debug(f"Best time: {best_time}",
               display_width/2-150, display_height/2+50)
         debug(f"Last time: {end_time}", display_width/2-150,
