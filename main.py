@@ -45,8 +45,8 @@ def lobby(best_time=100, end_time=100):
         start = showText("Press space to start or click on this", (int(display_width/2-250) +
                                                                    displacement_x), int((display_height/4) + displacement_y), 230)
         showText(f"Best time: {best_time}",
-                 int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
-        showText(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
+                 int(display_width/2-250 + displacement_x), int(display_height/2+50 - displacement_x))
+        showText(f"Last time: {end_time}", int(display_width/2-250 - displacement_x),
                  int(display_height/2+200 - displacement_y))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
