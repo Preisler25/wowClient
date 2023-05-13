@@ -10,7 +10,7 @@ def genRandomPos(s_w, s_h):
     return p_x, p_y
 
 
-def lobby():
+def lobby(best_time=100, end_time=100):
     pygame.display.set_caption('Lobby')
     game_exit = False
     while not game_exit:
@@ -18,12 +18,14 @@ def lobby():
         debug("Press space to start", display_width/2-150, display_height/2)
         debug(f"Best time: {best_time}",
               display_width/2-150, display_height/2+50)
+        debug(f"Last time: {end_time}", display_width/2-150,
+              display_height/2+100)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    best_time = gameLoop(best_time)
+                    best_time, end_time = gameLoop(best_time)
         pygame.display.update()
 
 
@@ -66,7 +68,7 @@ def gameLoop(best_time):
     endTime = time.time()-start_time
     if endTime < best_time:
         best_time = endTime
-    return best_time
+    return best_time, endTime
 
 
 pygame.init()
@@ -81,7 +83,7 @@ white = (255, 255, 255)
 
 # Create game display
 game_display = pygame.display.set_mode((display_width, display_height))
-best_time = 10
+
 
 # Lobby loop
 lobby()
