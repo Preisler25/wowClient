@@ -57,7 +57,7 @@ def lobby(best_time=100, end_time=100):
 
 def gameLoop(best_time):
     # Load enemy
-    enemy = Char('graphics\Player\player_stand.png')
+    enemy = Char('graphics/Player/player_stand.png')
     enemy.setRandomPos(display_width, display_height)
     pygame.display.set_caption('Game')
 
