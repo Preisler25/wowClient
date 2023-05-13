@@ -43,7 +43,7 @@ def lobby(best_time=100, end_time=100):
 
         game_display.blit(bg, (0, 0))
         start = showText("Press space to start or click on this", (int(display_width/2-250) +
-                                                                   displacement_x), int((display_height/4) + displacement_y), 10)
+                                                                   displacement_x), int((display_height/4) + displacement_y), (255, 255, 255), (0, 0, 0))
         debug(f"Best time: {best_time}",
               int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
         debug(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
