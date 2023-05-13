@@ -21,15 +21,16 @@ class Char:
         self.pos_x = random.randint(0, max_width)
         self.pos_y = random.randint(0, max_height)
 
-def dotCh(text, count):
-    if count == 240:
-        count += 1
+def dotCh(text, count, dt):
+    print(f"con:{count}")
+    if count > 0.6:
+        count += 1*dt
         text += "."
-        count = 0
+        count = 0.0
         if text[-4:-1] == "...":
             text = "Press space "
     else:
-        count +=1
+        count +=1*dt
     return text, count
 
 
@@ -37,7 +38,7 @@ def lobby(best_time=100, end_time=100):
     pygame.display.set_caption('Lobby')
     game_exit = False
 
-    counter = 0
+    counter = 0.0
     press_text = "Press space "
 
     amplitude = 12
@@ -49,9 +50,14 @@ def lobby(best_time=100, end_time=100):
     settings_btn = pygame.transform.scale(settings_btn, (settings_btn_size, settings_btn_size))
     bg = pygame.image.load("graphics/menu_bg.jpeg")
 
+    prev_time = time.time()
+
     while not game_exit:
 
-        press_text, counter = dotCh(press_text, counter)
+        dt = time.time() - prev_time
+        prev_time = time.time()
+
+        press_text, counter = dotCh(press_text, counter, dt)
 
         displacement_x = amplitude * \
             math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
