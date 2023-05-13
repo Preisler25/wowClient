@@ -10,7 +10,32 @@ def genRandomPos(s_w, s_h):
     return p_x, p_y
 
 
-def gameLoop():
+def lobby():
+    pygame.display.set_caption('Lobby')
+    game_exit = False
+    while not game_exit:
+        game_display.fill(black)
+        debug("Press space to start", display_width/2-150, display_height/2)
+        debug(f"Best time: {best_time}",
+              display_width/2-150, display_height/2+50)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_exit = True
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    best_time = gameLoop(best_time)
+        pygame.display.update()
+
+
+def gameLoop(best_time):
+    # Load button
+    enemy = pygame.image.load(
+        'graphics/Player/player_stand.png').convert_alpha()
+    w = display_width-enemy.get_width()
+    h = display_height-enemy.get_height()
+
+    pygame.display.set_caption('Game')
+
     pos_x, pos_y = genRandomPos(w, h)
     # Game loop
     game_exit = False
@@ -19,10 +44,10 @@ def gameLoop():
     while counter < 10 and not game_exit:
 
         game_display.fill(black)
-        b = game_display.blit(button, (pos_x, pos_y))
+        b = game_display.blit(enemy, (pos_x, pos_y))
         # Displaying time and points
         debug(f"Time: {time.time()-start_time}", display_width-170, 10)
-        debug(f"Points: {counter}", display_width/2-75, 10)
+        debug(f"Remaining: {10-counter}", display_width/2-75, 10)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -38,6 +63,10 @@ def gameLoop():
         pygame.display.update()
 
     print("Game over!")
+    endTime = time.time()-start_time
+    if endTime < best_time:
+        best_time = endTime
+    return best_time
 
 
 pygame.init()
@@ -52,14 +81,10 @@ white = (255, 255, 255)
 
 # Create game display
 game_display = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('Game')
+best_time = 10
 
-button = pygame.image.load('graphics/Player/player_stand.png').convert_alpha()
-w = display_width-button.get_width()
-h = display_height-button.get_height()
-
-gameLoop()
-gameLoop()
+# Lobby loop
+lobby()
 
 # Quit Pygame
 pygame.quit()
