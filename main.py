@@ -33,6 +33,7 @@ def lobby(best_time=100, end_time=100):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     best_time, end_time = gameLoop(best_time)
+                    pygame.display.set_caption('Lobby')
         pygame.display.update()
 
 
