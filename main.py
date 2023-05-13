@@ -29,6 +29,8 @@ def lobby(best_time=100, end_time=100):
     amplitude = 12
     frequency = 0.2
 
+    bg = pygame.image.load("graphics/menu_bg.jpeg")
+
     while not game_exit:
 
         displacement_x = amplitude * \
@@ -39,11 +41,9 @@ def lobby(best_time=100, end_time=100):
             math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
         displacement_y = int(displacement_y)
 
-        bg = pygame.image.load("graphics/menu_bg.jpeg")
-
         game_display.blit(bg, (0, 0))
         start = showText("Press space to start or click on this", (int(display_width/2-250) +
-                                                                   displacement_x), int((display_height/4) + displacement_y), (255, 255, 255), (0, 0, 0))
+                                                                   displacement_x), int((display_height/4) + displacement_y), 10, (255, 255, 255))
         debug(f"Best time: {best_time}",
               int(display_width/2-150 + displacement_x), int(display_height/2+50 - displacement_x))
         debug(f"Last time: {end_time}", int(display_width/2-150 - displacement_x),
@@ -73,11 +73,11 @@ def gameLoop(best_time):
     game_exit = False
     start_time = time.time()
     counter = 0
+    bg = pygame.image.load("graphics/menu_bg.jpeg")
     while counter < 10 and not game_exit:
 
-        game_display.fill(black)
+        game_display.blit(bg, (0, 0))
         b = game_display.blit(enemy.img, (enemy.pos_x, enemy.pos_y))
-        # Displaying time and points
         showText(f"Time: {time.time()-start_time}", display_width-170, 10)
         showText(f"Remaining: {10-counter}", display_width/2-75, 10)
 
