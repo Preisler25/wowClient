@@ -69,7 +69,6 @@ def gameLoop(best_time):
                     debug("alma")
         pygame.display.update()
 
-    print("Game over!")
     endTime = time.time()-start_time
     if endTime < best_time:
         best_time = endTime
