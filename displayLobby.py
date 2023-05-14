@@ -33,7 +33,6 @@ def lobby():
 
     # display loop
     while not game_exit:
-
         # getting dt
         dt = time.time() - prev_time
         prev_time = time.time()
@@ -50,6 +49,7 @@ def lobby():
         # drawing background
         screen.drawImg(bg, (0, 0))
         # Settings button
+        settings_btn.setRight()
         settings_btn.darw()
         # Press space text
         showText(press_text, int(screen.width/2-100),

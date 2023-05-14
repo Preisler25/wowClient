@@ -24,13 +24,13 @@ def settings():
 
     # display loop
     while not game_exit:
-
         # drawing settings
         # drawing background
         screen.drawImg(bg, (0, 0))
         # back button
         back_btn.darw()
         # full screen btn
+        full_scr_btn.setRight()
         full_scr_btn.darw()
 
         # Event handling
