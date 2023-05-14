@@ -1,28 +1,25 @@
 import pygame
 import math
 import time
-from appConst import game_display, display_width, display_height
+from appConst import game_display, display_width, display_height, best_time, end_time
 from button import PressBtn
 from text_to_scr import showText
 from visuFunc import dotCh
 from displaySettings import settings
 from displayGame import game
+from baseFunc import genSin, genCos
 
 
 # ------------------Lobby------------------
 
 
-def lobby(best_time=100, end_time=100):
+def lobby():
     game_exit = False
     pygame.display.set_caption('Lobby')
 
     # settings some minor variables for the press space text
     counter = 0.0
     press_text = "Press space "
-
-    # settings sin and cos variables
-    amplitude = 12
-    frequency = 0.2
 
     # creating settings button
     settings_btn_icon_size = 70
@@ -46,13 +43,9 @@ def lobby(best_time=100, end_time=100):
         press_text, counter = dotCh(press_text, counter, dt)
 
         # getting displacement form sin and cos
-        displacement_x = amplitude * \
-            math.sin(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
-        displacement_x = int(displacement_x)
+        displacement_x = genSin()
 
-        displacement_y = amplitude * \
-            math.cos(2 * math.pi * frequency * pygame.time.get_ticks() / 300)
-        displacement_y = int(displacement_y)
+        displacement_y = genCos()
 
         # drawing lobby
         # drawing background
@@ -79,7 +72,7 @@ def lobby(best_time=100, end_time=100):
                 # space
                 if event.key == pygame.K_SPACE:
                     # Start games
-                    best_time, end_time = game(best_time)
+                    game()
                     pygame.display.set_caption('Lobby')
             # mouse click
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:

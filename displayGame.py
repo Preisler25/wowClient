@@ -2,13 +2,14 @@ import pygame
 import time
 from debug import debug
 from text_to_scr import showText
-from appConst import display_width, display_height, game_display
+from appConst import display_width, display_height, game_display, player
 from char import Char
+from baseFunc import endGame
 
 # ------------------Game------------------
 
 
-def game(best_time):
+def game():
     game_exit = False
     pygame.display.set_caption('Game')
 
@@ -52,7 +53,6 @@ def game(best_time):
                 if enemy.rect.collidepoint(pos):
                     # setting new enemy position
                     enemy.setRandomPos(display_width, display_height)
-                    print(enemy)
                     # increasing counter
                     counter += 1
             # keydown
@@ -63,9 +63,6 @@ def game(best_time):
         # Update display
         pygame.display.update()
 
-    # getting end time
-    endTime = time.time()-start_time
-    # testing for new best time
-    if endTime < best_time:
-        best_time = endTime
-    return best_time, endTime
+    # ending game
+    player.endTime = time.time()-start_time
+    player.endGame()
