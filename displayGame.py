@@ -4,7 +4,7 @@ from debug import debug
 from text_to_scr import showText
 from appConst import screen, player
 from char import Char
-from servFunc import sendToServer
+from servFunc import sendLogin
 
 # ------------------Game------------------
 
@@ -65,7 +65,7 @@ def game():
             # keydown
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    sendToServer()
+                    sendLogin("admin", "admin")
 
         # Update display
         pygame.display.update()

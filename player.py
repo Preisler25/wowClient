@@ -9,7 +9,7 @@ class Player:
         self.miss_clicked = miss_clicked
 
     def __str__(self):
-        return f"{self.username} {self.password} {self.email} {self.best_time} {self.last_time} {self.games_played} {self.miss_clicked}"
+        return f"username: {self.username}\npassword: {self.password}\nemail: {self.email}\nbest_time: {self.best_time}\nend_time: {self.end_time}\ngames_played: {self.games_played}\nmiss_clicked: {self.miss_clicked}"
 
     def endGame(self):
         # testing for new best time
