@@ -1,10 +1,10 @@
 class Player:
-    def __init__(self, username, password, email, best_time, last_time, games_played, miss_clicked):
+    def __init__(self, username, password, email, best_time, end_time, games_played, miss_clicked):
         self.username = username
         self.password = password
         self.email = email
         self.best_time = best_time
-        self.last_time = last_time
+        self.end_time = end_time
         self.games_played = games_played
         self.miss_clicked = miss_clicked
 
@@ -14,4 +14,4 @@ class Player:
     def endGame(self):
         # testing for new best time
         if self.end_time < self.best_time:
-            self.best_time = self.endTime
+            self.best_time = self.end_time

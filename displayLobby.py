@@ -1,7 +1,6 @@
 import pygame
-import math
 import time
-from appConst import game_display, display_width, display_height, best_time, end_time
+from appConst import game_display, display_width, display_height, player
 from button import PressBtn
 from text_to_scr import showText
 from visuFunc import dotCh
@@ -56,10 +55,10 @@ def lobby():
         showText(press_text, (int(display_width/2-100) + displacement_x),
                  int((display_height/4) + displacement_y), 230)
         # Best time
-        showText(f"Best time: {best_time}", int(
+        showText(f"Best time: {player.best_time}", int(
             display_width/2-250 + displacement_x), int(display_height/2+50 - displacement_x))
         # Last time
-        showText(f"Last time: {end_time}", int(
+        showText(f"Last time: {player.end_time}", int(
             display_width/2-200 - displacement_x), int(display_height/2+200 - displacement_y))
 
         # Event handling
