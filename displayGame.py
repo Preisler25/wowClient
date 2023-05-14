@@ -34,7 +34,6 @@ def game():
         game_display.blit(bg, (0, 0))
         # drawing enemy
         enemy.draw()
-        print(enemy)
         # drawing time
         showText(f"Time: {time.time()-start_time}", display_width/2-200, 40)
         # drawing counter
@@ -49,6 +48,10 @@ def game():
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 # getting mouse position
                 pos = pygame.mouse.get_pos()
+                print("------------------")
+                print(f"counter: {counter}")
+                print(f"pos: {pos}")
+                print(f"enemy.rect: {enemy.rect}")
                 # if enemy pressed
                 if enemy.rect.collidepoint(pos):
                     # setting new enemy position
