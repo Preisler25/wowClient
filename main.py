@@ -15,7 +15,6 @@ def main():
     # Quit Pygame
     pygame.quit()
     quit()
-    
 
 
 main()
