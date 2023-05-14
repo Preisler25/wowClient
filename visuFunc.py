@@ -1,5 +1,4 @@
 def dotCh(text, count, dt):
-    print(f"con:{count}")
     if count > 0.6:
         count += 1*dt
         text += "."

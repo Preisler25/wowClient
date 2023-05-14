@@ -4,7 +4,6 @@ from debug import debug
 from text_to_scr import showText
 from appConst import display_width, display_height, game_display, player
 from char import Char
-from baseFunc import endGame
 
 # ------------------Game------------------
 
@@ -64,5 +63,5 @@ def game():
         pygame.display.update()
 
     # ending game
-    player.endTime = time.time()-start_time
+    player.end_time = time.time()-start_time
     player.endGame()
