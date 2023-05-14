@@ -1,5 +1,5 @@
 import pygame
-from appConst import game_display
+from appConst import game_display, display_width
 from button import PressBtn
 
 # ------------------Settings------------------
@@ -11,6 +11,11 @@ def settings():
 
     # loading background
     bg = pygame.image.load("graphics/menu_bg.jpeg")
+
+    # creating fullscr button
+    full_scr_btn_icon_size_x = 70
+    full_scr_btn_icon_size_y = 50
+    full_scr_btn = PressBtn(display_width-full_scr_btn_icon_size_x, 0, full_scr_btn_icon_size_x, full_scr_btn_icon_size_y, "graphics/full_scr.png")
 
     # creating back button
     back_icon_size = 50
@@ -25,6 +30,8 @@ def settings():
         game_display.blit(bg, (0, 0))
         # back button
         back_btn.darw()
+        # full screen btn
+        full_scr_btn.darw
 
         # Event handling
         for event in pygame.event.get():
