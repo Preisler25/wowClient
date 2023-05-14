@@ -12,6 +12,7 @@ def game():
     game_exit = False
     pygame.display.set_caption('Game')
 
+    player.games_played += 1
     # Load enemy
     enemy = Char('graphics/Player/player_stand.png')
     # Setting enemy position randomly but not out of the screen
@@ -58,6 +59,8 @@ def game():
                     enemy.setRandomPos(display_width, display_height)
                     # increasing counter
                     counter += 1
+                else:
+                    player.miss_clicked += 1
             # keydown
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:

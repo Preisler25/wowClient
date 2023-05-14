@@ -1,9 +1,8 @@
 import pygame
 
-
 pygame.init()
-font = pygame.font.Font(None, 50)
 
+font = pygame.font.Font(None, 50)
 
 def debug(text, x=10, y=10):
     debug_surface = pygame.display.get_surface()
