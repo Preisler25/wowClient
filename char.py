@@ -11,7 +11,7 @@ class Char:
         self.rect = self.img.get_rect(topleft=(self.pos_x, self.pos_y))
 
     def __str__(self):
-        return f"pos_x:{self.pos_x}, pos_y:{self.pos_y}"
+        return f"pos_x:{self.pos_x}, pos_y:{self.pos_y}, rect:{self.rect}"
 
     def setRandomPos(self, w, h):
         max_width = w-self.img.get_width()

@@ -34,6 +34,7 @@ def game():
         game_display.blit(bg, (0, 0))
         # drawing enemy
         enemy.draw()
+        print(enemy)
         # drawing time
         showText(f"Time: {time.time()-start_time}", display_width/2-200, 40)
         # drawing counter
