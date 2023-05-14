@@ -22,6 +22,7 @@ def settings():
     back_btn = PressBtn(0, 0, back_icon_size,
                         back_icon_size, "graphics/back.jpg")
 
+    
     # display loop
     while not game_exit:
         # drawing settings
@@ -38,6 +39,9 @@ def settings():
             # quit
             if event.type == pygame.QUIT:
                 game_exit = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_exit = True
             # mouse click
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 # getting mouse position
