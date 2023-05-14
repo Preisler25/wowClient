@@ -1,6 +1,6 @@
 import pygame
 import random
-from appConst import game_display
+from appConst import screen
 
 
 class Char:
@@ -20,5 +20,5 @@ class Char:
         self.pos_y = random.randint(0, max_height)
 
     def draw(self):
-        game_display.blit(self.img, (self.pos_x, self.pos_y))
+        screen.drawImg(self.img, (self.pos_x, self.pos_y))
         self.rect = self.img.get_rect(topleft=(self.pos_x, self.pos_y))

@@ -1,6 +1,6 @@
 import pygame
 import time
-from appConst import game_display, display_width, display_height, player
+from appConst import screen, player
 from button import PressBtn
 from text_to_scr import showText
 from visuFunc import dotCh
@@ -22,7 +22,7 @@ def lobby():
 
     # creating settings button
     settings_btn_icon_size = 70
-    settings_btn = PressBtn(display_width-settings_btn_icon_size, 0,
+    settings_btn = PressBtn(screen.width-settings_btn_icon_size, 0,
                             settings_btn_icon_size, settings_btn_icon_size, "graphics/settings.png")
 
     # loading background
@@ -48,24 +48,24 @@ def lobby():
 
         # drawing lobby
         # drawing background
-        game_display.blit(bg, (0, 0))
+        screen.drawImg(bg, (0, 0))
         # Settings button
         settings_btn.darw()
         # Press space text
-        showText(press_text, int(display_width/2-100),
-                 int(display_height-100), 230)
+        showText(press_text, int(screen.width/2-100),
+                 int(screen.height-100), 230)
         # Best time
         showText(f"Best time: {player.best_time}", int(
-            display_width/2-300 + displacement_x), int(display_height/2+50 - displacement_x))
+            screen.width/2-300 + displacement_x), int(screen.height/2+50 - displacement_x))
         # Last time
         showText(f"Last time: {player.end_time}", int(
-            display_width/2-250 + displacement_y), int(display_height/2+0 - displacement_y))
+            screen.width/2-250 + displacement_y), int(screen.height/2+0 - displacement_y))
         # miss_clicked
         showText(f"Missed_clicks: {player.miss_clicked}", int(
-            display_width/2-50 + displacement_x), int(display_height/2-100 - displacement_x))
+            screen.width/2-50 + displacement_x), int(screen.height/2-100 - displacement_x))
         # played
         showText(f"Games_played: {player.games_played}", int(
-            display_width/2 + displacement_y), int(display_height/2-150 - displacement_y))
+            screen.width/2 + displacement_y), int(screen.height/2-150 - displacement_y))
 
         # Event handling
         for event in pygame.event.get():

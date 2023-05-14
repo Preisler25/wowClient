@@ -1,5 +1,5 @@
 import pygame
-from appConst import game_display
+from appConst import screen
 
 
 class PressBtn:
@@ -13,4 +13,4 @@ class PressBtn:
         self.rect = self.img.get_rect(topleft=self.pos)
 
     def darw(self):
-        game_display.blit(self.img, self.pos)
+        screen.drawImg(self.img, self.pos)

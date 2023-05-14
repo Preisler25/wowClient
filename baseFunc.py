@@ -1,5 +1,6 @@
 import pygame
 import math
+from appConst import screen
 
 # settings sin and cos variables
 amplitude = 7
@@ -16,3 +17,4 @@ def genCos():
     dis_y = amplitude * math.cos(2 * math.pi * frequency *
                                  pygame.time.get_ticks() / 100)
     return int(dis_y)
+

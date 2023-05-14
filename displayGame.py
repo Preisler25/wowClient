@@ -2,7 +2,7 @@ import pygame
 import time
 from debug import debug
 from text_to_scr import showText
-from appConst import display_width, display_height, game_display, player
+from appConst import screen, player
 from char import Char
 
 # ------------------Game------------------
@@ -16,7 +16,7 @@ def game():
     # Load enemy
     enemy = Char('graphics/Player/player_stand.png')
     # Setting enemy position randomly but not out of the screen
-    enemy.setRandomPos(display_width, display_height)
+    enemy.setRandomPos(screen.width, screen.height)
 
     # getting start time
     start_time = time.time()
@@ -32,13 +32,13 @@ def game():
 
         # drawing game
         # drawing background
-        game_display.blit(bg, (0, 0))
+        screen.drawImg(bg, (0, 0))
         # drawing enemy
         enemy.draw()
         # drawing time
-        showText(f"Time: {time.time()-start_time}", display_width/2-200, 40)
+        showText(f"Time: {time.time()-start_time}", screen.width/2-200, 40)
         # drawing counter
-        showText(f"Remaining: {10-counter}", display_width/2-75, 10)
+        showText(f"Remaining: {10-counter}", screen.width/2-75, 10)
 
         # Event handling
         for event in pygame.event.get():
@@ -56,7 +56,7 @@ def game():
                 # if enemy pressed
                 if enemy.rect.collidepoint(pos):
                     # setting new enemy position
-                    enemy.setRandomPos(display_width, display_height)
+                    enemy.setRandomPos(screen.width, screen.height)
                     # increasing counter
                     counter += 1
                 else:
