@@ -1,44 +1,11 @@
 import pygame
-from debug import debug
-from text_to_scr import showText
-import random
 import time
 import math
-
-
-class PressBtn:
-    def __init__(self, pos_x, pos_y, wanted_size_x, wanted_size_y, imgUrl):
-        self.pos = (pos_x, pos_y)
-        self.wanted_size_x = wanted_size_x
-        self.wanted_size_y = wanted_size_y
-        self.img = pygame.image.load(imgUrl).convert_alpha()
-        self.img = pygame.transform.scale(
-            self.img, (self.wanted_size_x, self.wanted_size_y))
-        self.rect = self.img.get_rect(topleft=self.pos)
-
-    def darw(self):
-        game_display.blit(self.img, self.pos)
-
-
-class Char:
-    def __init__(self, imgUrl):
-        self.pos_x = 0
-        self.pos_y = 0
-        self.img = pygame.image.load(imgUrl).convert_alpha()
-        self.rect = self.img.get_rect(topleft=(self.pos_x, self.pos_y))
-
-    def __str__(self):
-        return f"pos_x:{self.pos_x}, pos_y:{self.pos_y}"
-
-    def setRandomPos(self, w, h):
-        max_width = w-self.img.get_width()
-        max_height = h-self.img.get_height()
-        self.pos_x = random.randint(0, max_width)
-        self.pos_y = random.randint(0, max_height)
-
-    def draw(self):
-        game_display.blit(self.img, (self.pos_x, self.pos_y))
-        self.rect = self.img.get_rect(topleft=(self.pos_x, self.pos_y))
+from debug import debug
+from text_to_scr import showText
+from appConst import display_width, display_height, game_display
+from button import PressBtn
+from char import Char
 
 
 def dotCh(text, count, dt):
@@ -52,6 +19,20 @@ def dotCh(text, count, dt):
     else:
         count += 1*dt
     return text, count
+
+
+# ------------------Main------------------
+def main():
+
+    # Initialize Pygame
+    pygame.init()
+
+    # Lobby loop
+    lobby()
+
+    # Quit Pygame
+    pygame.quit()
+    quit()
 
 # ------------------Lobby------------------
 
@@ -240,24 +221,4 @@ def gameLoop(best_time):
     return best_time, endTime
 
 
-# ------------------Main------------------
- # Initialize Pygame
-pygame.init()
-
-# Display dimensions
-display_width = 800
-display_height = 600
-
-# Colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-# Create game display
-game_display = pygame.display.set_mode((display_width, display_height))
-
-# Lobby loop
-lobby()
-
-# Quit Pygame
-pygame.quit()
-quit()
+main()
