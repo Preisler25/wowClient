@@ -1,5 +1,5 @@
 import pygame
-from displayLobby import lobby
+from displayLogin import login
 
 # ------------------Main------------------
 
@@ -10,12 +10,11 @@ def main():
     pygame.init()
 
     # Lobby loop
-    lobby()
+    login()
 
     # Quit Pygame
     pygame.quit()
     quit()
-    
 
 
 main()
