@@ -13,7 +13,7 @@
                 <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3" target="2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="42" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="19">
+                <mxCell id="42" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3" target="19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="Client" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -60,7 +60,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="&lt;h1 style=&quot;font-size: 18px;&quot;&gt;True&lt;/h1&gt;&lt;h1 style=&quot;font-size: 33px;&quot;&gt;&lt;p style=&quot;font-size: 11px; font-weight: 400;&quot;&gt;Sending them their key&lt;/p&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;labelBackgroundColor=none;fontSize=23;fontColor=#f0f0f0;" parent="1" vertex="1">
-                    <mxGeometry x="450" y="290" width="190" height="70" as="geometry"/>
+                    <mxGeometry x="450" y="280" width="190" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="&lt;h1 style=&quot;font-size: 18px;&quot;&gt;False&lt;/h1&gt;&lt;p&gt;If user not in DB sending back &quot;User not found&quot;&lt;/p&gt;&lt;p&gt;ElseIf worng pw&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=11;" parent="1" vertex="1">
                     <mxGeometry x="450" y="170" width="190" height="90" as="geometry"/>
