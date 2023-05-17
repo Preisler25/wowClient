@@ -4,7 +4,7 @@ from debug import debug
 from text_to_scr import showText
 from appConst import screen, player
 from char import Char
-from servFunc import sendLogin
+from servFunc import sendToServer
 
 # ------------------Game------------------
 
@@ -61,15 +61,11 @@ def game():
                     # increasing counter
                     counter += 1
                 else:
-                    player.miss_clicked += 1
-            # keydown
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    sendLogin("admin", "admin")
-
+                    player.missed_clicks += 1
         # Update display
         pygame.display.update()
 
     # ending game
     player.end_time = time.time()-start_time
+    sendToServer()
     player.endGame()
