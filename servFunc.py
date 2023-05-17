@@ -31,6 +31,8 @@ def sendLogin(name, password):
         player.miss_clicked = response_json["miss_clicked"]
         print(player)
         return True
+    else:
+        return False
     
 
 """

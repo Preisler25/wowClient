@@ -2,7 +2,8 @@ import pygame
 from appConst import screen
 from textfield import Textfield
 from button import PressBtn
-
+from displayLobby import lobby
+from servFunc import sendLogin
 # ------------------Settings------------------
 
 
@@ -51,9 +52,9 @@ def login():
                 pos = pygame.mouse.get_pos()
                 # back
                 if login_btn.rect.collidepoint(pos):
-                    print("Login")
-                    print(username_input.text)
-                    print(password_input.text)
+                    if sendLogin(username_input.text, password_input.text):
+                        lobby()
+                        game_exit = True
                     
                 
 
