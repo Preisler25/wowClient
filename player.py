@@ -3,7 +3,7 @@ class Player:
         self.username = username
         self.password = password
         self.email = email
-        self.best_time = best_time
+        self.best_time = float(best_time)
         self.end_time = end_time
         self.games_played = games_played
         self.missed_clicks = missed_clicks
