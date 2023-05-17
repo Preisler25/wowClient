@@ -14,20 +14,25 @@ def login():
 
     # creating  username input
     username_input = Textfield(
-        100, 100, 200, 50, "Username", None, (0, 0, 0), (255, 255, 255))
+        screen.width/2-100, 100, 200, 50, "Username", None)
 
+    # creating password input
+    password_input = Textfield(
+        screen.width/2-100, 200, 200, 50, "Password", None)
     # display loop
     while not game_exit:
         # drawing settings
         # drawing background
         screen.drawImg(bg, (0, 0))
-        # username input
+        #drawing inputs
         username_input.draw()
+        password_input.draw()
 
         # Event handling
         for event in pygame.event.get():
-            #testing input
+            #testing inputs
             username_input.update(event)
+            password_input.update(event)
 
             # quit
             if event.type == pygame.QUIT:

@@ -3,20 +3,20 @@ from appConst import screen
 
 
 class Textfield:
-    def __init__(self, x, y, width, height, text, font, color, background_color):
+    def __init__(self, x, y, width, height, text, font):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.text = text
         self.font = font
-        self.color = color
-        self.background_color = background_color
+        self.color = (255, 255, 255)
+        self.background_color = (0, 0, 0)
         self.rect = pygame.Rect(x, y, width, height)
         self.active = False
 
     def draw(self):
-        pygame.draw.rect(screen.surf, self.background_color, self.rect)
+        pygame.draw.rect(screen.surf, self.background_color, self.rect, 0, 4)
         font = pygame.font.Font(self.font, self.height - 4)
         text = font.render(self.text, True, self.color)
         screen.surf.blit(text, (self.rect.x + 2, self.rect.y + 2))
