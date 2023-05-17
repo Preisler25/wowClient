@@ -61,7 +61,7 @@ def lobby():
         showText(f"Last time: {player.end_time}", int(
             screen.width/2-250 + displacement_y), int(screen.height/2+0 - displacement_y))
         # miss_clicked
-        showText(f"Missed_clicks: {player.miss_clicked}", int(
+        showText(f"Missed_clicks: {player.missed_clicks}", int(
             screen.width/2-50 + displacement_x), int(screen.height/2-100 - displacement_x))
         # played
         showText(f"Games_played: {player.games_played}", int(

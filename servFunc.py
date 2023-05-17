@@ -28,7 +28,7 @@ def sendLogin(name, password):
         player.email = response_json["email"]
         player.best_time = response_json["best_time"]
         player.games_played = response_json["games_played"]
-        player.miss_clicked = response_json["miss_clicked"]
+        player.missed_clicks = response_json["missed_clicks"]
         print(player)
         return True
     else:
