@@ -26,17 +26,15 @@ def login():
 
         # Event handling
         for event in pygame.event.get():
+            #testing input
+            username_input.update(event)
+
             # quit
             if event.type == pygame.QUIT:
                 game_exit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
-            # mouse click
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                # username input
-                print(event)
-                print(username_input.rect.collidepoint(event.pos))
-                username_input.update(event)
+                
 
         pygame.display.update()

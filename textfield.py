@@ -25,9 +25,17 @@ class Textfield:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.active = True
+                self.color = (0, 0, 0)
+                self.background_color = (255, 255, 255)
             else:
                 self.active = False
+                self.color = (255, 255, 255)
+                self.background_color = (0, 0, 0)
         if event.type == pygame.KEYDOWN:
+            print(event.type)
+            print(event.key)
+            print(event.unicode)
+            print(self.active)
             if self.active:
                 if event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
