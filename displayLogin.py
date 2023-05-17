@@ -1,6 +1,7 @@
 import pygame
 from appConst import screen
 from textfield import Textfield
+from button import PressBtn
 
 # ------------------Settings------------------
 
@@ -19,6 +20,9 @@ def login():
     # creating password input
     password_input = Textfield(
         screen.width/2-100, 200, 200, 50, "Password", None)
+    
+    # creating login button
+    login_btn = PressBtn(screen.width/2-100, 300, 200, 50, "graphics/login.png")
     # display loop
     while not game_exit:
         # drawing settings
@@ -27,7 +31,8 @@ def login():
         #drawing inputs
         username_input.draw()
         password_input.draw()
-
+        #drawing login button
+        login_btn.darw()
         # Event handling
         for event in pygame.event.get():
             #testing inputs
@@ -40,6 +45,16 @@ def login():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
+            # mouse click
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                # getting mouse position
+                pos = pygame.mouse.get_pos()
+                # back
+                if login_btn.rect.collidepoint(pos):
+                    print("Login")
+                    print(username_input.text)
+                    print(password_input.text)
+                    
                 
 
         pygame.display.update()
