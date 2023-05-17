@@ -67,5 +67,5 @@ def game():
 
     # ending game
     player.end_time = time.time()-start_time
-    sendToServer()
     player.endGame()
+    sendToServer()
